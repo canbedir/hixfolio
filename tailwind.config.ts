@@ -10,9 +10,6 @@ const config = {
   ],
   prefix: "",
   theme: {
-    colors: {
-      primary: "262.1 83.3% 57.8%",
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -22,15 +19,12 @@ const config = {
     },
     extend: {
       colors: {
+        primary: "hsl(262.1 83.3% 57.8%)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
