@@ -5,8 +5,8 @@ import React from "react";
 const Navbar = () => {
   return (
     <div>
-      <Link href={"/"}>
-        <Image src={"/logo.svg"} alt="" width={250} height={150} />
+      <Link href={"/"} className="inline-block">
+          <Image src={"/logo.svg"} alt="" width={250} height={150} />
       </Link>
     </div>
   );
