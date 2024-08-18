@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("container mx-auto max-w-7xl py-3", ubuntu.className)}>{children}</body>
+      <body className={cn("", ubuntu.className)}>{children}</body>
     </html>
   );
 }
