@@ -2,6 +2,7 @@ import React from "react";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -9,9 +10,15 @@ const Footer = () => {
       <div className="flex items-center justify-between h-full container max-w-7xl">
         <div>© 2024 liseden mezun olunca inş iş bulurum</div>
         <div className="flex items-center justify-center gap-3">
-          <IoLogoLinkedin size={30} />
-          <FaGithub size={30} />
-          <FaXTwitter size={25}/>
+          <Link href={"https://www.linkedin.com/in/canbedir/"}>
+            <IoLogoLinkedin size={30} />
+          </Link>
+          <Link href={"https://www.github.com/canbedir"}>
+            <FaGithub size={30} />
+          </Link>
+          <Link href={"https://www.x.com/canhix"}>
+            <FaXTwitter size={25} />
+          </Link>
         </div>
       </div>
     </div>
