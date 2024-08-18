@@ -6,38 +6,39 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <div className="h-screen">
-      <div className="grid grid-cols-2">
-        <div className="flex flex-col items-center justify-end gap-y-20">
-          <h1 className="text-center text-6xl font-extrabold">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-20">
+        <div className="flex flex-col items-center justify-end gap-y-10 lg:gap-y-20">
+          <h1 className="text-center text-4xl lg:text-6xl font-extrabold">
             Create Your Portfolio in Minutes
           </h1>
-          <div>
-            <div className="w-full h-[150px] px-5 bg-gray-50 flex items-center justify-center shadow-lg rounded-2xl">
-              <div className="flex items-center gap-1">
-                <h1 className="text-2xl font-semibold">
-                  Quick and easy portfolio creation for showcasing your work.
-                </h1>
-                <Button className="text-white text-lg" size={"hix"}>
-                  Create Portfolio
-                </Button>
-              </div>
+
+          <div className="w-full h-[150px] px-5 bg-gray-50 flex items-center justify-center shadow-lg rounded-2xl">
+            <div className="flex flex-col lg:flex-row items-center gap-5">
+              <h1 className="text-xl lg:text-2xl font-semibold">
+                Quick and easy portfolio creation for showcasing your work.
+              </h1>
+              <Button className="text-white text-lg" size={"hix"}>
+                Create Portfolio
+              </Button>
             </div>
           </div>
         </div>
-        <div>
+
+        <div className="justify-center hidden lg:flex">
           <Image
             src={"/illustrator/browsing.svg"}
-            alt=""
+            alt="Illustration of browsing"
             width={700}
             height={200}
           />
         </div>
       </div>
-      <div className="w-full bg-slate-50 shadow-lg rounded-2xl max-h-[400px] mt-10 p-5">
+
+      <div className="w-full bg-slate-50 shadow-lg rounded-2xl max-h-max mt-10 p-5">
         <h1 className="text-xl text-center font-bold">
           Let’s build a stunning portfolio with our easy-to-use builder.
         </h1>
-        <div className="flex items-center justify-around p-10">
+        <div className="flex flex-col lg:flex-row items-center justify-around p-10 gap-5 gap-y-5 lg:gap-y-0">
           <div className="h-[170px] w-[300px] bg-white shadow-xl rounded-2xl flex flex-col gap-3">
             <h1 className="text-xl font-bold text-center mt-5">
               No coding required
@@ -51,12 +52,13 @@ const Hero = () => {
               </Button>
             </Link>
           </div>
+
           <div className="h-[170px] w-[300px] bg-white shadow-xl rounded-2xl flex flex-col gap-3 px-5">
             <h1 className="text-xl font-bold text-center mt-5">
               Fully customizable
             </h1>
             <p className="text-center text-lg">
-            Customise your own portfolio site as you like
+              Customise your own portfolio site as you like
             </p>
             <Link href={""} className="text-center">
               <Button variant={"link"} className="text-xl font-bold">
@@ -64,6 +66,7 @@ const Hero = () => {
               </Button>
             </Link>
           </div>
+
           <div className="h-[170px] w-[300px] bg-white shadow-xl rounded-2xl flex flex-col gap-3 px-5">
             <h1 className="text-xl font-bold text-center mt-5">
               Responsive design
