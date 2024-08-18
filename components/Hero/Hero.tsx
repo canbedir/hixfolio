@@ -16,9 +16,11 @@ const Hero = () => {
               <h1 className="text-xl lg:text-2xl font-semibold">
                 Quick and easy portfolio creation for showcasing your work.
               </h1>
-              <Button className="text-white text-lg" size={"hix"}>
-                Create Portfolio
-              </Button>
+              <Link href={"/create"}>
+                <Button className="text-white text-lg" size={"hix"}>
+                  Create Portfolio
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -31,8 +33,6 @@ const Hero = () => {
           />
         </div>
       </div>
-
-
 
       <div className="w-full rounded-2xl max-h-max mt-10 p-5 shadow-primary shadow-lg">
         <h1 className="text-xl text-center font-bold">
