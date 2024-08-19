@@ -11,7 +11,7 @@ const CreateTopMenu = ({ step, setStep }: { step: number; setStep: any }) => {
         className={`${
           step === 1
             ? "text-primary border-b border-primary"
-            : "text-muted-foreground hover:text-gray-200"
+            : "text-muted-foreground hover:text-black"
         } cursor-pointer`}
         onClick={() => handleStepChange(1)}
       >
@@ -80,7 +80,7 @@ const CreateTopMenu = ({ step, setStep }: { step: number; setStep: any }) => {
       <span
         className={`${
           step === 8
-            ? "text-primary border-b border-primary"
+            ? "text-green-500 border-b border-green-500"
             : "text-muted-foreground hover:text-black"
         } cursor-pointer`}
         onClick={() => handleStepChange(8)}

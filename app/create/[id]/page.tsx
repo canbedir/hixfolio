@@ -7,9 +7,6 @@ import { useState } from "react";
 const CreateIdPage = () => {
   const [step, setStep] = useState(1);
 
-
-
-
   return (
     <div className="container max-w-4xl h-[800px]">
       <div className="flex flex-col items-center justify-center gap-16 h-full">
@@ -19,7 +16,7 @@ const CreateIdPage = () => {
             Complete Your Profil
           </h1>
         </div>
-        <div className="w-full h-[400px] shadow-lg shadow-primary">
+        <div className="w-full min-h-[400px] relative shadow-lg shadow-primary">
           <div>
             <CreateTopMenu setStep={setStep} step={step} />
             <Steps step={step} setStep={setStep} />
