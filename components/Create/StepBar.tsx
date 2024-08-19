@@ -4,8 +4,8 @@ const StepBar = ({step}:{step:number}) => {
   return (
     <div className="w-full h-4 rounded-full bg-gray-200">
       <div
-        className={`rounded-full h-4 bg-primary transition-width duration-300 ${
-          step === 8 ? "bg-green-600 shadow-lg shadow-green-500" : ""
+        className={`rounded-full h-4 transition-width duration-300 ${
+          step === 8 ? "bg-green-500 shadow-lg shadow-green-500" : "bg-primary"
         }`}
         style={{
           width:
