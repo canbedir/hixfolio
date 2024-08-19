@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Nunito_Sans, Ubuntu } from "next/font/google";
-import { Lato } from "next/font/google";
+import { Nunito_Sans, Roboto } from "next/font/google";
 import "./globals.css";
-import { cn } from "@/lib/utils";
 
-const ubuntu = Nunito_Sans({ subsets: ["latin"], weight:["300","400","500","700","800","1000"]});
+const nunitoSans = Roboto({ subsets: ["latin"],weight:["100","300","400","500","700","900"]});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("", ubuntu.className)}>{children}</body>
+      <body className={nunitoSans.className}>{children}</body>
     </html>
   );
 }
