@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -7,6 +7,7 @@ import DateSelector from "./DateSelector";
 import LinkForm from "./LinkForm";
 import SkillForm from "./SkillForm";
 import ProjectForm from "./ProjectForm";
+import { useParams } from "next/navigation";
 
 interface StepsProps {
   step: number;
@@ -14,6 +15,8 @@ interface StepsProps {
 }
 
 const Steps = ({ step, setStep }: StepsProps) => {
+  const { id } = useParams();
+
   const [name, setName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [email, setEmail] = useState("");
@@ -22,6 +25,39 @@ const Steps = ({ step, setStep }: StepsProps) => {
   const [school, setSchool] = useState("");
   const [company, setCompany] = useState("");
   const [jobPosition, setJobPosition] = useState("");
+
+  useEffect(() => {
+    const savedName = localStorage.getItem(`${id}_name`);
+    const savedJobTitle = localStorage.getItem(`${id}_jobTitle`);
+    const savedEmail = localStorage.getItem(`${id}_email`);
+    const savedCity = localStorage.getItem(`${id}_city`);
+    const savedPhone = localStorage.getItem(`${id}_phone`);
+    const savedSchool = localStorage.getItem(`${id}_school`);
+    const savedCompany = localStorage.getItem(`${id}_company`);
+    const savedJobPosition = localStorage.getItem(`${id}_jobPosition`);
+
+    if (savedName) setName(savedName);
+    if (savedJobTitle) setJobTitle(savedJobTitle);
+    if (savedEmail) setEmail(savedEmail);
+    if (savedCity) setCity(savedCity);
+    if (savedPhone) setPhone(savedPhone);
+    if (savedSchool) setSchool(savedSchool);
+    if (savedCompany) setCompany(savedCompany);
+    if (savedJobPosition) setJobPosition(savedJobPosition);
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      localStorage.setItem(`${id}_name`, name);
+      localStorage.setItem(`${id}_jobTitle`, jobTitle);
+      localStorage.setItem(`${id}_email`, email);
+      localStorage.setItem(`${id}_city`, city);
+      localStorage.setItem(`${id}_phone`, phone);
+      localStorage.setItem(`${id}_school`, school);
+      localStorage.setItem(`${id}_company`, company);
+      localStorage.setItem(`${id}_jobPosition`, jobPosition);
+    }
+  }, [name, jobTitle, email, city, phone, school, company, jobPosition, id]);
 
   const handleDownload = () => {
     const userInfo = {
@@ -38,20 +74,18 @@ const Steps = ({ step, setStep }: StepsProps) => {
       projects: projectForms,
     };
 
-    // JSON formatına çevirme
     const jsonContent = JSON.stringify(userInfo, null, 2);
 
-    // Blob oluşturma
     const blob = new Blob([jsonContent], { type: "application/json" });
 
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "portfolio_data.json"; // Dosya ismi
+    a.download = `hixfolio_${name}.json`
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url); // Belleği temizleme
+    URL.revokeObjectURL(url);
   };
 
   const handleNext = () => {
@@ -498,7 +532,9 @@ const Steps = ({ step, setStep }: StepsProps) => {
       {step === 8 && (
         <div className="p-5 h-[335px]">
           <div className="text-center h-full flex items-center justify-center flex-col">
-            <h1 className="text-4xl font-bold">Your portfolio site is ready! 🥳</h1>
+            <h1 className="text-4xl font-bold">
+              Your portfolio site is ready! 🥳
+            </h1>
             <Button
               onClick={handleDownload}
               className="mt-5 text-white text-lg"
