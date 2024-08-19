@@ -12,7 +12,7 @@ const ChooseUs = () => {
           </h1>
           <p className="text-muted-foreground">
             We pride ourselves on offering a user-friendly interface that makes
-            portfolio creation as seamless as possible. Whether you're
+            portfolio creation as seamless as possible. Whether you&apos;re
             tech-savvy or a beginner, our intuitive design ensures that you can
             easily navigate through the process. Our platform guides you
             step-by-step, allowing you to focus on what truly matters-showcasing
@@ -43,7 +43,7 @@ const ChooseUs = () => {
             Time-Saving Efficiency
           </h1>
           <p className="text-muted-foreground">
-            We understand that your time is valuable, which is why we've
+            We understand that your time is valuable, which is why we&apos;ve
             designed our platform to be incredibly efficient. With just a few
             clicks, you can create a professional-looking portfolio that
             accurately reflects your skills and experiences. Our pre-designed
