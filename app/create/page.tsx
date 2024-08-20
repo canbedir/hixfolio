@@ -44,18 +44,28 @@ const DashboardPage: React.FC = () => {
     router.push(`/create/${id}`);
   };
 
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
-    <div className="container mt-10 max-w-7xl">
+    <div className="container mt-10 min-h-[900px] max-w-7xl shadow-lg shadow-primary">
       <div className="flex items-center justify-center">
         <Link href="/" className="inline-block">
           <Image src="/logo.svg" alt="Logo" width={250} height={150} />
         </Link>
       </div>
-      <div className="flex items-center justify-between border-b py-2">
-        <h1 className="text-4xl font-bold">Dashboard</h1>
+      <div className="flex items-center justify-center mt-5">
         <Button
           onClick={handleCreatePortfolio}
-          className="text-white text-lg"
+          className="text-white w-full text-lg"
           size={"hix"}
         >
           Create Portfolio
@@ -64,17 +74,23 @@ const DashboardPage: React.FC = () => {
 
       {/* Portfolio List */}
       <div className="mt-8">
-        <h2 className="text-3xl font-semibold">Your Portfolios</h2>
+        <h2 className="text-3xl font-semibold text-center">Your Portfolios</h2>
         {portfolios.length > 0 ? (
-          <ul className="mt-4">
+          <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
             {portfolios.map((portfolio) => (
               <li key={portfolio.id} className="mb-4">
-                <Link href={`/create/${portfolio.id}`}>{portfolio.name}</Link>
+                <Link href={`/create/${portfolio.id}`}>
+                  <Button variant={"link"} className="font-medium text-lg">
+                    {`${portfolio.name} - ${formatDate(portfolio.createdAt)}`}
+                  </Button>
+                </Link>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="mt-4 text-lg">No portfolios created yet.</p>
+          <div className="mt-10 flex items-center justify-center">
+            <Image src={"/illustrator/no-data.svg"} alt="" width={500} height={100}/>
+          </div>
         )}
       </div>
     </div>
