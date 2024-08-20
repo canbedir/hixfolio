@@ -63,145 +63,185 @@ const Steps = ({ step, setStep }: StepsProps) => {
   const generateHTML = () => {
     return `
       <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${name}'s Portfolio</title>
-  <style>
-    .container {
-      height: 90vh;
-      width: 98%;
-      padding:20px;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-      background-color: #ffffff;
-      font-family:Arial,"sans-serif";
-    }
-    .card {
-      position: absolute;
-      width: 250px;
-      height: 100px;
-      display: flex;
-      padding: 7px;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 16px;
-      text-align: center;
-      box-shadow: 0 10px 15px -3px #973bff;
-      border-radius: 20px;
-      transition: box-shadow 0.5s;
-    }
-    .card:hover {
-      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
-    }
-    .top-left {
-      top: 20px;
-      left: 20px;
-      transform: rotate(-20deg);
-    }
-    .top-right {
-      top: 20px;
-      right: 20px;
-      transform: rotate(20deg);
-    }
-    .bottom-left {
-      bottom: 20px;
-      left: 20px;
-      transform: rotate(20deg);
-    }
-    .bottom-right {
-      bottom: 20px;
-      right: 20px;
-      transform: rotate(-20deg);
-    }
-    .profile-pic {
-      height: 300px;
-      width: 300px;
-      border-radius: 50%;
-      box-shadow: 0px 10px 15px #973bff;
-      overflow: hidden;
-      transition: box-shadow 0.5s;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        font-size: 40px;
+      }
+      p {
+        font-size: 20px;
+        color: #747474;
+      }
+      
+      a {
+        text-decoration: none;
+        color: #747474;
+        
+      }
+        a:hover{
+        color:#DEDEDE
+      }
 
-    }
-    .profile-pic img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-    .profile-pic:hover {
-      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
-    }
-    .content-card {
-      padding: 20px;
-      box-shadow: 0px 10px 15px #973bff;
-      border-radius: 20px;
-      transition: box-shadow 0.5s;
-      min-width: 400px;
-      text-align: center;
-    }
-    .content-card:hover {
-      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
-    }
-    .skills-social {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    h1 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 18px;
-      margin: 5px 0;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="card top-left">
-      <h1>${name}</h1>
-      <p>${city}</p>
-      <p>studied at ${school}</p>
-    </div>
-    <div class="card top-right">
-      <h1>${jobTitle}</h1>
-      <p>working at ${company}</p>
-    </div>
-    <div class="card bottom-left">
-      <h1>${email}</h1>
-    </div>
-    <div class="card bottom-right">
-      <h1>${phone}</h1>
-    </div>
-    <div class="profile-pic">
-      <img src="" alt="">
-    </div>
-    <div class="content-card skills-social">
-      <div class="skills">
-        <h1>Skills</h1>
-        ${skillForms.map(skill => `<p>${skill.name}</p>`).join('')}
+      body {
+        min-height: 100vh;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        background-color: #202020;
+        color: #dedede;
+        font-family: sans-serif;
+      }
+
+      .navbar {
+        width: 100%;
+        height: 60px;
+        background-color: #2d2d2d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .main-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 100px 250px;
+      }
+
+      .main-left {
+        max-width: 450px;
+      }
+
+      .main-email {
+        margin-top: 20px;
+      }
+
+      .email-btn {
+        padding: 15px 30px;
+        background-color: #a6a6a6;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor:pointer;
+      }
+
+      .email-btn:hover{
+      background-color: #DEDEDE;
+      transition:0.3s;
+      }
+
+      .main-img {
+        height: 400px;
+        width: 400px;
+        border-radius: 50%;
+        background-color: #2d2d2d;
+        text-align: center;
+      }
+
+      .main-img img {
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .main-bottom {
+        padding: 70px 250px;
+      }
+
+      .skills-container {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+          rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+          rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        padding: 5px;
+        min-height: 550px;
+      }
+
+      .skills-title {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+
+      .skills-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:60px; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <h1>${name}'s Portfolio</h1>
       </div>
-      <div class="social-media">
-        <h1>Social Media</h1>
-        ${linkForms.map(link => `<p> <a href={link.url}>${link.name} </a> </p>`).join('')}
+      <div class="main-container">
+        <div class="main-left">
+          <div class="main-title">
+            <h1>Hi There</h1>
+            <h1>I'am ${name}</h1>
+            <h1>${jobTitle}</h1>
+          </div>
+          <div class="main-p">
+            <p>I live in ${city}, I study/studied at ${school}.</p>
+            <p>I work/worked in ${company}.</p>
+            <p>My phone number: ${phone}</p>
+          </div>
+          <div class="main-email">
+            <a href="mailto:${email}?subject=Subject&body=Message">
+              <button class="email-btn">Contact me email</button>
+            </a>
+          </div>
+        </div>
+        <div class="main-right">
+          <div class="main-img">
+          </div>
+        </div>
+      </div>
+      <div class="main-bottom">
+        <div class="skills-container">
+          <h1 class="skills-title">Skills</h1>
+          <div class="skills-main">
+            ${skillForms
+              .map(
+                (skill) => `
+            <p>${skill.name}</p>
+            `
+              )
+              .join("")}
+          </div>
+          <h1 class="skills-title">Projects</h1>
+          <div class="skills-main">
+            ${projectForms
+              .map(
+                (project) => `
+            <p><a href=${project.url}>${project.name} </a></p>
+            `
+              )
+              .join("")}
+          </div>
+          <h1 class="skills-title">Social Media</h1>
+          <div class="skills-main">
+            ${linkForms
+              .map(
+                (link) => `
+            <p><a href=${link.url}>${link.name}</a></p>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="content-card projects">
-      <h1>Projects</h1>
-      ${projectForms.map(project => `<p> <a href={project.url}>${project.name} </a> </p>`).join('')}
-    </div>
-  </div>
-</body>
+  </body>
 </html>
     `;
-};
+  };
 
   const handleDownload = () => {
     const htmlContent = generateHTML();
@@ -663,7 +703,9 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <h1 className="text-4xl font-bold">
               Your portfolio site is ready! 🥳
             </h1>
-            <Button className="text-white" onClick={handleDownload}>Download Portfolio</Button>
+            <Button className="text-white" onClick={handleDownload}>
+              Download Portfolio
+            </Button>
           </div>
           <div className="absolute bottom-3 left-5">
             <Button
