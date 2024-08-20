@@ -8,6 +8,7 @@ import LinkForm from "./LinkForm";
 import SkillForm from "./SkillForm";
 import ProjectForm from "./ProjectForm";
 import { useParams } from "next/navigation";
+import { userInfo } from "os";
 
 interface StepsProps {
   step: number;
@@ -59,29 +60,156 @@ const Steps = ({ step, setStep }: StepsProps) => {
     }
   }, [name, jobTitle, email, city, phone, school, company, jobPosition, id]);
 
+  const generateHTML = () => {
+    return `
+      <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${name}'s Portfolio</title>
+  <style>
+    .container {
+      height: 90vh;
+      width: 98%;
+      padding:20px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      background-color: #ffffff;
+      font-family:Arial,"sans-serif";
+    }
+    .card {
+      position: absolute;
+      width: 250px;
+      height: 100px;
+      display: flex;
+      padding: 7px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
+      box-shadow: 0 10px 15px -3px #973bff;
+      border-radius: 20px;
+      transition: box-shadow 0.5s;
+    }
+    .card:hover {
+      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    }
+    .top-left {
+      top: 20px;
+      left: 20px;
+      transform: rotate(-20deg);
+    }
+    .top-right {
+      top: 20px;
+      right: 20px;
+      transform: rotate(20deg);
+    }
+    .bottom-left {
+      bottom: 20px;
+      left: 20px;
+      transform: rotate(20deg);
+    }
+    .bottom-right {
+      bottom: 20px;
+      right: 20px;
+      transform: rotate(-20deg);
+    }
+    .profile-pic {
+      height: 300px;
+      width: 300px;
+      border-radius: 50%;
+      box-shadow: 0px 10px 15px #973bff;
+      overflow: hidden;
+      transition: box-shadow 0.5s;
+
+    }
+    .profile-pic img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+    .profile-pic:hover {
+      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    }
+    .content-card {
+      padding: 20px;
+      box-shadow: 0px 10px 15px #973bff;
+      border-radius: 20px;
+      transition: box-shadow 0.5s;
+      min-width: 400px;
+      text-align: center;
+    }
+    .content-card:hover {
+      box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    }
+    .skills-social {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card top-left">
+      <h1>${name}</h1>
+      <p>${city}</p>
+      <p>studied at ${school}</p>
+    </div>
+    <div class="card top-right">
+      <h1>${jobTitle}</h1>
+      <p>working at ${company}</p>
+    </div>
+    <div class="card bottom-left">
+      <h1>${email}</h1>
+    </div>
+    <div class="card bottom-right">
+      <h1>${phone}</h1>
+    </div>
+    <div class="profile-pic">
+      <img src="" alt="">
+    </div>
+    <div class="content-card skills-social">
+      <div class="skills">
+        <h1>Skills</h1>
+        ${skillForms.map(skill => `<p>${skill.name}</p>`).join('')}
+      </div>
+      <div class="social-media">
+        <h1>Social Media</h1>
+        ${linkForms.map(link => `<p> <a href={link.url}>${link.name} </a> </p>`).join('')}
+      </div>
+    </div>
+    <div class="content-card projects">
+      <h1>Projects</h1>
+      ${projectForms.map(project => `<p> <a href={project.url}>${project.name} </a> </p>`).join('')}
+    </div>
+  </div>
+</body>
+</html>
+    `;
+};
+
   const handleDownload = () => {
-    const userInfo = {
-      name: name,
-      jobTitle: jobTitle,
-      email: email,
-      city: city,
-      phone: phone,
-      school: school,
-      company: company,
-      jobPosition: jobPosition,
-      links: linkForms,
-      skills: skillForms,
-      projects: projectForms,
-    };
-
-    const jsonContent = JSON.stringify(userInfo, null, 2);
-
-    const blob = new Blob([jsonContent], { type: "application/json" });
-
+    const htmlContent = generateHTML();
+    const blob = new Blob([htmlContent], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `hixfolio_${name}.json`
+    a.download = `portfolio_${name}.html`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -531,17 +659,11 @@ const Steps = ({ step, setStep }: StepsProps) => {
 
       {step === 8 && (
         <div className="p-5 h-[335px]">
-          <div className="text-center h-full flex items-center justify-center flex-col">
+          <div className="text-center h-full flex items-center justify-center flex-col gap-5">
             <h1 className="text-4xl font-bold">
               Your portfolio site is ready! 🥳
             </h1>
-            <Button
-              onClick={handleDownload}
-              className="mt-5 text-white text-lg"
-              size={"lg"}
-            >
-              Download
-            </Button>
+            <Button className="text-white" onClick={handleDownload}>Download Portfolio</Button>
           </div>
           <div className="absolute bottom-3 left-5">
             <Button
