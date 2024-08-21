@@ -35,7 +35,7 @@ const SkillForm = ({
         </Label>
         <div className="flex w-full items-center gap-5">
           <Input
-            className="shadow-lg shadow-primary"
+            className="shadow-lg shadow-cyan-500"
             type="text"
             id="skillName"
             value={name}

@@ -10,6 +10,17 @@ import { motion } from "framer-motion";
 const CreateIdPage = () => {
   const [step, setStep] = useState(1);
 
+  const shadowColor = `
+  ${step === 1 && `shadow-lg shadow-primary`}
+  ${step === 2 && `shadow-lg shadow-blue-600`}
+  ${step === 3 && `shadow-lg shadow-orange-600`}
+  ${step === 4 && `shadow-lg shadow-yellow-500`}
+  ${step === 5 && `shadow-lg shadow-cyan-500`}
+  ${step === 6 && `shadow-lg shadow-pink-500`}
+  ${step === 7 && `shadow-lg shadow-rose-600`}
+  ${step === 8 && `shadow-lg shadow-green-600`}
+  `;
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,7 +37,7 @@ const CreateIdPage = () => {
             Complete Your Profil
           </h1>
         </div>
-        <div className="w-full min-h-[400px] relative shadow-lg shadow-primary">
+        <div className={`w-full min-h-[400px] relative ${shadowColor}`}>
           <div>
             <CreateTopMenu setStep={setStep} step={step} />
             <Steps step={step} setStep={setStep} />

@@ -34,7 +34,7 @@ const ProjectForm = ({
         </Label>
         <div className="flex w-full items-center gap-5">
           <Input
-            className="shadow-lg shadow-primary"
+            className="shadow-lg shadow-pink-500"
             type="text"
             placeholder="Hixfolio"
             id="link"
@@ -43,7 +43,7 @@ const ProjectForm = ({
           />
           <div className="flex w-full items-center gap-5">
             <Input
-              className="shadow-lg shadow-primary"
+              className="shadow-lg shadow-pink-500"
               type="text"
               placeholder="Project Link"
               id="url"

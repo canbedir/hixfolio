@@ -34,7 +34,7 @@ const LinkForm = ({
         </Label>
         <div className="flex w-full items-center gap-5">
           <Input
-            className="shadow-lg shadow-primary"
+            className="shadow-lg shadow-yellow-400"
             type="text"
             placeholder="Twitter"
             id="link"
@@ -43,7 +43,7 @@ const LinkForm = ({
           />
           <div className="flex w-full items-center gap-5">
             <Input
-              className="shadow-lg shadow-primary"
+              className="shadow-lg shadow-yellow-400"
               type="text"
               placeholder="Link Url"
               id="url"

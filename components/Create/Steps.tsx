@@ -16,6 +16,17 @@ interface StepsProps {
 }
 
 const Steps = ({ step, setStep }: StepsProps) => {
+  const shadowColor = `
+  ${step === 1 && `shadow-lg shadow-primary`}
+  ${step === 2 && `shadow-lg shadow-blue-600`}
+  ${step === 3 && `shadow-lg shadow-orange-600`}
+  ${step === 4 && `shadow-lg shadow-yellow-500`}
+  ${step === 5 && `shadow-lg shadow-cyan-500`}
+  ${step === 6 && `shadow-lg shadow-pink-500`}
+  ${step === 7 && `shadow-lg shadow-rose-600`}
+  ${step === 8 && `shadow-lg shadow-green-600`}
+  `;
+
   const { id } = useParams();
 
   const [name, setName] = useState("");
@@ -64,7 +75,18 @@ const Steps = ({ step, setStep }: StepsProps) => {
         localStorage.setItem(`${id}_profilePic`, profilePic);
       }
     }
-  }, [name, jobTitle, email, city, phone, school, company, jobPosition, profilePic, id]);
+  }, [
+    name,
+    jobTitle,
+    email,
+    city,
+    phone,
+    school,
+    company,
+    jobPosition,
+    profilePic,
+    id,
+  ]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -365,7 +387,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 <div>
                   <Label htmlFor="name">Name & Surname</Label>
                   <Input
-                    className="shadow-lg shadow-primary"
+                    className={shadowColor}
                     type="text"
                     id="name"
                     placeholder="Irmak Balota"
@@ -376,7 +398,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 <div>
                   <Label htmlFor="JobTitle">Job Title</Label>
                   <Input
-                    className="shadow-lg shadow-primary"
+                    className={shadowColor}
                     type="text"
                     id="JobTitle"
                     placeholder="Fullstack Developer"
@@ -387,9 +409,13 @@ const Steps = ({ step, setStep }: StepsProps) => {
               </div>
               <div className="flex flex-col items-center gap-2 justify-center">
                 <Label htmlFor="profilePic">Profile Picture</Label>
-                <img className="h-[90px] w-[90px] object-cover rounded-full" src={profilePic ? profilePic : "Resim Yükle"} alt="" />
+                <img
+                  className="h-[90px] w-[90px] object-cover rounded-full"
+                  src={profilePic ? profilePic : "Resim Yükle"}
+                  alt=""
+                />
                 <Input
-                  className="shadow-lg shadow-primary"
+                  className={shadowColor}
                   type="file"
                   id="profilePic"
                   accept="image/*"
@@ -402,7 +428,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 <div>
                   <Label htmlFor="Email">Email</Label>
                   <Input
-                    className="shadow-lg shadow-primary"
+                    className={shadowColor}
                     type="text"
                     id="Email"
                     placeholder="hix@dev.com"
@@ -413,7 +439,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 <div>
                   <Label htmlFor="City">City</Label>
                   <Input
-                    className="shadow-lg shadow-primary"
+                    className={shadowColor}
                     type="text"
                     id="City"
                     placeholder="Istanbul"
@@ -425,7 +451,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
               <div className="w-1/2">
                 <Label htmlFor="Phone">Phone</Label>
                 <Input
-                  className="shadow-lg shadow-primary"
+                  className={shadowColor}
                   type="text"
                   id="Phone"
                   placeholder="000 000 00 00"
@@ -455,7 +481,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <div className="w-1/2">
               <Label htmlFor="school">School Name</Label>
               <Input
-                className="shadow-lg shadow-primary"
+                className={shadowColor}
                 type="text"
                 id="school"
                 placeholder="Koç University"
@@ -501,7 +527,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 <div>
                   <Label htmlFor="company">Company Name</Label>
                   <Input
-                    className="shadow-lg shadow-primary"
+                    className={shadowColor}
                     type="text"
                     id="company"
                     placeholder="Hix Ltd"
@@ -512,7 +538,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 <div>
                   <Label htmlFor="jobposition">Job Position</Label>
                   <Input
-                    className="shadow-lg shadow-primary"
+                    className={shadowColor}
                     type="text"
                     id="jobposition"
                     placeholder="Backend Developer"
@@ -706,13 +732,14 @@ const Steps = ({ step, setStep }: StepsProps) => {
               Choose a colour for your Portfolio site!
             </p>
             <div className="flex items-center justify-center gap-3">
-              <span className="rounded-full bg-red-600 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-green-600 h-7 w-7 cursor-pointer"></span>
               <span className="rounded-full bg-primary h-7 w-7 cursor-pointer"></span>
+              <span className="rounded-full bg-blue-600 h-7 w-7 cursor-pointer"></span>
+              <span className="rounded-full bg-orange-600 h-7 w-7 cursor-pointer"></span>
+              <span className="rounded-full bg-yellow-500 h-7 w-7 cursor-pointer"></span>
+              <span className="rounded-full bg-cyan-500 h-7 w-7 cursor-pointer"></span>
               <span className="rounded-full bg-pink-500 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-blue-500 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-orange-500 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-cyan-700 h-7 w-7 cursor-pointer"></span>
+              <span className="rounded-full bg-rose-600 h-7 w-7 cursor-pointer"></span>
+              <span className="rounded-full bg-green-600 h-7 w-7 cursor-pointer"></span>
             </div>
             <div className="absolute bottom-3 left-5">
               <Button
@@ -745,7 +772,10 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <h1 className="text-4xl font-bold">
               Your portfolio site is ready! 🥳
             </h1>
-            <Button className="text-white" onClick={handleDownload}>
+            <Button
+              className="text-white bg-green-600 hover:bg-green-500"
+              onClick={handleDownload}
+            >
               Download Portfolio
             </Button>
           </div>
