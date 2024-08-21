@@ -385,8 +385,9 @@ const Steps = ({ step, setStep }: StepsProps) => {
                   />
                 </div>
               </div>
-              <div>
+              <div className="flex flex-col items-center gap-2 justify-center">
                 <Label htmlFor="profilePic">Profile Picture</Label>
+                <img className="h-[90px] w-[90px] object-cover rounded-full" src={profilePic ? profilePic : "Resim Yükle"} alt="" />
                 <Input
                   className="shadow-lg shadow-primary"
                   type="file"
