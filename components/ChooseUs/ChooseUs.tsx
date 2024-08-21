@@ -1,9 +1,15 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 const ChooseUs = () => {
   return (
-    <div className="shadow-primary shadow-lg p-5">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="shadow-primary shadow-lg p-5"
+    >
       <h1 className="text-5xl font-bold text-center">Why Choose Us?</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 mt-10 gap-20">
         <div className="flex flex-col justify-center gap-2">
@@ -55,7 +61,7 @@ const ChooseUs = () => {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

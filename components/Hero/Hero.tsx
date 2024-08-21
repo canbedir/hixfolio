@@ -1,11 +1,17 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <div className="min-h-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="min-h-screen"
+    >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <div className="flex flex-col items-center justify-end gap-y-10 lg:gap-y-20">
           <h1 className="text-center text-4xl lg:text-6xl font-extrabold">
@@ -82,7 +88,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

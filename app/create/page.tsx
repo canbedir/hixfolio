@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface Portfolio {
   id: string;
@@ -18,8 +19,9 @@ const DashboardPage: React.FC = () => {
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
 
   useEffect(() => {
-    const storedPortfolios: Portfolio[] =
-      JSON.parse(localStorage.getItem("portfolios") || "[]");
+    const storedPortfolios: Portfolio[] = JSON.parse(
+      localStorage.getItem("portfolios") || "[]"
+    );
     setPortfolios(storedPortfolios);
   }, []);
 
@@ -46,17 +48,22 @@ const DashboardPage: React.FC = () => {
 
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
-    <div className="container mt-10 min-h-[900px] max-w-7xl shadow-lg shadow-primary">
+    <motion.div
+      initial={{ opacity: 0, translateY: 200 }}
+      animate={{ opacity: 1, translateY: 0 }}
+      variant={{ x: 50 }}
+      className="container mt-10 min-h-[900px] max-w-7xl shadow-lg shadow-primary"
+    >
       <div className="flex items-center justify-center">
         <Link href="/" className="inline-block">
           <Image src="/logo.svg" alt="Logo" width={250} height={150} />
@@ -89,11 +96,16 @@ const DashboardPage: React.FC = () => {
           </ul>
         ) : (
           <div className="mt-10 flex items-center justify-center">
-            <Image src={"/illustrator/no-data.svg"} alt="" width={500} height={100}/>
+            <Image
+              src={"/illustrator/no-data.svg"}
+              alt=""
+              width={500}
+              height={100}
+            />
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
