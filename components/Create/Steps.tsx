@@ -26,6 +26,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
   const [school, setSchool] = useState("");
   const [company, setCompany] = useState("");
   const [jobPosition, setJobPosition] = useState("");
+  const [profilePic, setProfilePic] = useState<string | null>(null);
 
   useEffect(() => {
     const savedName = localStorage.getItem(`${id}_name`);
@@ -36,6 +37,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
     const savedSchool = localStorage.getItem(`${id}_school`);
     const savedCompany = localStorage.getItem(`${id}_company`);
     const savedJobPosition = localStorage.getItem(`${id}_jobPosition`);
+    const savedProfilePic = localStorage.getItem(`${id}_profilePic`);
 
     if (savedName) setName(savedName);
     if (savedJobTitle) setJobTitle(savedJobTitle);
@@ -45,6 +47,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
     if (savedSchool) setSchool(savedSchool);
     if (savedCompany) setCompany(savedCompany);
     if (savedJobPosition) setJobPosition(savedJobPosition);
+    if (savedProfilePic) setProfilePic(savedProfilePic);
   }, [id]);
 
   useEffect(() => {
@@ -57,8 +60,33 @@ const Steps = ({ step, setStep }: StepsProps) => {
       localStorage.setItem(`${id}_school`, school);
       localStorage.setItem(`${id}_company`, company);
       localStorage.setItem(`${id}_jobPosition`, jobPosition);
+      if (profilePic) {
+        localStorage.setItem(`${id}_profilePic`, profilePic);
+      }
     }
-  }, [name, jobTitle, email, city, phone, school, company, jobPosition, id]);
+  }, [name, jobTitle, email, city, phone, school, company, jobPosition, profilePic, id]);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setProfilePic(base64String);
+        if (id) {
+          localStorage.setItem(`${id}_profilePic`, base64String);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  useEffect(() => {
+    const savedProfilePic = localStorage.getItem(`${id}_profilePic`);
+    if (savedProfilePic) {
+      setProfilePic(savedProfilePic);
+    }
+  }, [id]);
 
   const generateHTML = () => {
     return `
@@ -200,6 +228,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
         </div>
         <div class="main-right">
           <div class="main-img">
+            <img src="${profilePic}" alt="${name}'s Profile Picture" />
           </div>
         </div>
       </div>
@@ -331,27 +360,39 @@ const Steps = ({ step, setStep }: StepsProps) => {
       {step === 1 && (
         <div className="p-5">
           <div className="flex flex-col gap-5">
-            <div className="w-1/2 flex flex-col gap-5">
-              <div>
-                <Label htmlFor="name">Name & Surname</Label>
-                <Input
-                  className="shadow-lg shadow-primary"
-                  type="text"
-                  id="name"
-                  placeholder="Irmak Balota"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+            <div className="flex items-center justify-between">
+              <div className="w-1/2 flex flex-col gap-5">
+                <div>
+                  <Label htmlFor="name">Name & Surname</Label>
+                  <Input
+                    className="shadow-lg shadow-primary"
+                    type="text"
+                    id="name"
+                    placeholder="Irmak Balota"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="JobTitle">Job Title</Label>
+                  <Input
+                    className="shadow-lg shadow-primary"
+                    type="text"
+                    id="JobTitle"
+                    placeholder="Fullstack Developer"
+                    value={jobTitle}
+                    onChange={(e) => setJobTitle(e.target.value)}
+                  />
+                </div>
               </div>
               <div>
-                <Label htmlFor="JobTitle">Job Title</Label>
+                <Label htmlFor="profilePic">Profile Picture</Label>
                 <Input
                   className="shadow-lg shadow-primary"
-                  type="text"
-                  id="JobTitle"
-                  placeholder="Fullstack Developer"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
+                  type="file"
+                  id="profilePic"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload(e)}
                 />
               </div>
             </div>
