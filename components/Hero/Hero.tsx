@@ -45,7 +45,7 @@ const Hero = () => {
           Let’s build a stunning portfolio with our easy-to-use builder.
         </h1>
         <div className="flex flex-col lg:flex-row items-center justify-around p-10 gap-5 gap-y-5 lg:gap-y-0">
-          <div className="h-[170px] w-[300px] shadow-xl rounded-2xl flex flex-col gap-3">
+          <div className="h-[170px] w-[300px] dark:shadow-blue-950 shadow-xl rounded-2xl flex flex-col gap-3">
             <h1 className="text-xl font-bold text-center mt-5">
               No coding required
             </h1>
@@ -53,13 +53,16 @@ const Hero = () => {
               Create your own portfolio site without coding
             </p>
             <Link href={""} className="text-center">
-              <Button variant={"link"} className="text-xl font-bold">
+              <Button
+                variant={"link"}
+                className="text-xl font-bold dark:text-blue-600"
+              >
                 Load More
               </Button>
             </Link>
           </div>
 
-          <div className="h-[170px] w-[300px] shadow-xl rounded-2xl flex flex-col gap-3 px-5">
+          <div className="h-[170px] w-[300px] dark:shadow-blue-950 shadow-xl rounded-2xl flex flex-col gap-3 px-5">
             <h1 className="text-xl font-bold text-center mt-5">
               Fully customizable
             </h1>
@@ -67,13 +70,16 @@ const Hero = () => {
               Customise your own portfolio site as you like
             </p>
             <Link href={""} className="text-center">
-              <Button variant={"link"} className="text-xl font-bold">
+              <Button
+                variant={"link"}
+                className="text-xl font-bold dark:text-blue-600"
+              >
                 Load More
               </Button>
             </Link>
           </div>
 
-          <div className="h-[170px] w-[300px] shadow-xl rounded-2xl flex flex-col gap-3 px-5">
+          <div className="h-[170px] w-[300px] dark:shadow-blue-950 shadow-xl rounded-2xl flex flex-col gap-3 px-5">
             <h1 className="text-xl font-bold text-center mt-5">
               Responsive design
             </h1>
@@ -81,7 +87,10 @@ const Hero = () => {
               Designed suitable for every device
             </p>
             <Link href={""} className="text-center">
-              <Button variant={"link"} className="text-xl font-bold">
+              <Button
+                variant={"link"}
+                className="text-xl font-bold dark:text-blue-600"
+              >
                 Load More
               </Button>
             </Link>
