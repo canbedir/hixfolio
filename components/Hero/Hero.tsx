@@ -59,7 +59,7 @@ const Hero = () => {
             </Link>
           </div>
 
-          <div className="h-[170px] w-[300px] bg-white shadow-xl rounded-2xl flex flex-col gap-3 px-5">
+          <div className="h-[170px] w-[300px] shadow-xl rounded-2xl flex flex-col gap-3 px-5">
             <h1 className="text-xl font-bold text-center mt-5">
               Fully customizable
             </h1>
@@ -73,7 +73,7 @@ const Hero = () => {
             </Link>
           </div>
 
-          <div className="h-[170px] w-[300px] bg-white shadow-xl rounded-2xl flex flex-col gap-3 px-5">
+          <div className="h-[170px] w-[300px] shadow-xl rounded-2xl flex flex-col gap-3 px-5">
             <h1 className="text-xl font-bold text-center mt-5">
               Responsive design
             </h1>
