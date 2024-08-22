@@ -529,7 +529,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
           <div className="absolute bottom-3 left-5">
             <Button
               onClick={handleBack}
-              className=" text-lg"
+              className="text-lg"
               size={"lg"}
               variant={"outline"}
             >
@@ -539,7 +539,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
           <div className="absolute bottom-3 right-5">
             <Button
               onClick={handleNext}
-              className="text-white text-lg"
+              className="text-white text-lg bg-blue-600 hover:bg-blue-700"
               size={"lg"}
             >
               Next
@@ -596,7 +596,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <div className="absolute bottom-3 right-5">
               <Button
                 onClick={handleNext}
-                className="text-white text-lg"
+                className="text-white text-lg bg-orange-600 hover:bg-orange-700"
                 size={"lg"}
               >
                 Next
@@ -626,8 +626,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <div className="flex justify-start w-full">
               <Button
                 onClick={addLinkForm}
-                className="w-[80px]"
-                variant={"active"}
+                className="w-[80px] bg-yellow-500 hover:bg-yellow-600"
               >
                 New
               </Button>
@@ -646,7 +645,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
           <div className="absolute bottom-3 right-5">
             <Button
               onClick={handleNext}
-              className="text-white text-lg"
+              className="text-white text-lg bg-yellow-500 hover:bg-yellow-600"
               size={"lg"}
             >
               Next
@@ -675,8 +674,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <div className="flex justify-start w-full">
               <Button
                 onClick={addSkillForm}
-                className="w-[80px]"
-                variant={"active"}
+                className="w-[80px] bg-cyan-600 hover:bg-cyan-700"
               >
                 New
               </Button>
@@ -695,7 +693,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
           <div className="absolute bottom-3 right-5">
             <Button
               onClick={handleNext}
-              className="text-white text-lg"
+              className="text-white text-lg bg-cyan-600 hover:bg-cyan-700"
               size={"lg"}
             >
               Next
@@ -724,8 +722,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <div className="flex justify-start w-full">
               <Button
                 onClick={addProjectForm}
-                className="w-[80px]"
-                variant={"active"}
+                className="w-[80px] bg-pink-500 hover:bg-pink-600"
               >
                 New
               </Button>
@@ -744,7 +741,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
           <div className="absolute bottom-3 right-5">
             <Button
               onClick={handleNext}
-              className="text-white text-lg"
+              className="text-white text-lg bg-pink-500 hover:bg-pink-600"
               size={"lg"}
             >
               Next
@@ -801,7 +798,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
             <div className="absolute bottom-3 right-5">
               <Button
                 onClick={handleNext}
-                className="text-white text-lg"
+                className="text-white text-lg bg-rose-600 hover:bg-rose-700"
                 size={"lg"}
               >
                 Next

@@ -11,10 +11,13 @@ const Footer = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="shadow-black shadow-xl p-5 m-2 mt-4 h-[100px] border-t border-black/10"
+      className="shadow-primary shadow-md m-1 mt-5 h-[100px]"
     >
       <div className="flex items-center justify-between h-full container max-w-7xl">
         <div>© 2024 liseden mezun olunca inş iş bulurum</div>
+        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-primary to-indigo-900 text-4xl font-semibold">
+          hix
+        </h1>
         <div className="flex items-center justify-center gap-3">
           <Link href={"https://www.linkedin.com/in/canbedir/"}>
             <IoLogoLinkedin size={30} />
