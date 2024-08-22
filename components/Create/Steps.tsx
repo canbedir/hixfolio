@@ -8,7 +8,11 @@ import LinkForm from "./LinkForm";
 import SkillForm from "./SkillForm";
 import ProjectForm from "./ProjectForm";
 import { useParams } from "next/navigation";
-import { userInfo } from "os";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface StepsProps {
   step: number;
@@ -37,6 +41,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
   const [school, setSchool] = useState("");
   const [company, setCompany] = useState("");
   const [jobPosition, setJobPosition] = useState("");
+  const [color, setColor] = useState("");
   const [profilePic, setProfilePic] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,6 +53,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
     const savedSchool = localStorage.getItem(`${id}_school`);
     const savedCompany = localStorage.getItem(`${id}_company`);
     const savedJobPosition = localStorage.getItem(`${id}_jobPosition`);
+    const savedColor = localStorage.getItem(`${id}_color`);
     const savedProfilePic = localStorage.getItem(`${id}_profilePic`);
 
     if (savedName) setName(savedName);
@@ -58,6 +64,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
     if (savedSchool) setSchool(savedSchool);
     if (savedCompany) setCompany(savedCompany);
     if (savedJobPosition) setJobPosition(savedJobPosition);
+    if (savedColor) setProfilePic(savedColor);
     if (savedProfilePic) setProfilePic(savedProfilePic);
   }, [id]);
 
@@ -71,6 +78,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
       localStorage.setItem(`${id}_school`, school);
       localStorage.setItem(`${id}_company`, company);
       localStorage.setItem(`${id}_jobPosition`, jobPosition);
+      localStorage.setItem(`${id}_color`, color);
       if (profilePic) {
         localStorage.setItem(`${id}_profilePic`, profilePic);
       }
@@ -84,6 +92,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
     school,
     company,
     jobPosition,
+    color,
     profilePic,
     id,
   ]);
@@ -109,6 +118,18 @@ const Steps = ({ step, setStep }: StepsProps) => {
       setProfilePic(savedProfilePic);
     }
   }, [id]);
+
+  const colors = [
+    { hex: "#DEDEDE", name: "Default" },
+    { hex: "#7c3aed", name: "Violet" },
+    { hex: "#2563eb", name: "Ocean" },
+    { hex: "#ea580c", name: "Sunset" },
+    { hex: "#eab308", name: "Gold" },
+    { hex: "#06b6d4", name: "Seafoam" },
+    { hex: "#ec4899", name: "Bubblegum" },
+    { hex: "#dc2626", name: "Cherry" },
+    { hex: "#16a34a", name: "Mint" },
+  ];
 
   const generateHTML = () => {
     return `
@@ -142,7 +163,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
         margin: 0;
         box-sizing: border-box;
         background-color: #202020;
-        color: #dedede;
+        color: ${color};
         font-family: sans-serif;
       }
 
@@ -172,7 +193,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
 
       .email-btn {
         padding: 15px 30px;
-        background-color: #a6a6a6;
+        background-color: ${color};
         border: none;
         border-radius: 5px;
         font-size: 16px;
@@ -732,15 +753,31 @@ const Steps = ({ step, setStep }: StepsProps) => {
               Choose a colour for your Portfolio site!
             </p>
             <div className="flex items-center justify-center gap-3">
-              <span className="rounded-full bg-primary h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-blue-600 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-orange-600 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-yellow-500 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-cyan-500 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-pink-500 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-rose-600 h-7 w-7 cursor-pointer"></span>
-              <span className="rounded-full bg-green-600 h-7 w-7 cursor-pointer"></span>
+              {colors.map((stepColor) => (
+                <HoverCard key={stepColor.hex}>
+                  <HoverCardTrigger asChild>
+                    <span
+                      onClick={() => setColor(stepColor.hex)}
+                      className={`rounded-full h-7 w-7 cursor-pointer transition-all duration-300 ease-in-out ${
+                        color === stepColor.hex
+                          ? "scale-[1.30]"
+                          : ""
+                      }`}
+                      style={{ backgroundColor: stepColor.hex }}
+                    ></span>
+                  </HoverCardTrigger>
+                  <HoverCardContent
+                    className={`w-[110px] h-[40px]`}
+                    style={{ backgroundColor: stepColor.hex }}
+                  >
+                    <h1 className="w-full h-full flex items-center justify-center text-white">
+                      {stepColor.name}
+                    </h1>
+                  </HoverCardContent>
+                </HoverCard>
+              ))}
             </div>
+
             <div className="absolute bottom-3 left-5">
               <Button
                 onClick={handleBack}

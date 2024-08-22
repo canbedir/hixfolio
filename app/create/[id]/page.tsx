@@ -37,7 +37,9 @@ const CreateIdPage = () => {
             Complete Your Profil
           </h1>
         </div>
-        <div className={`w-full min-h-[400px] relative ${shadowColor}`}>
+        <div
+          className={`w-full min-h-[400px] duration-300 relative ${shadowColor}`}
+        >
           <div>
             <CreateTopMenu setStep={setStep} step={step} />
             <Steps step={step} setStep={setStep} />
