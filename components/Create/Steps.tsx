@@ -137,7 +137,11 @@ const Steps = ({ step, setStep }: StepsProps) => {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <title>${name}</title>
     <style>
       h1 {
         font-size: 40px;
@@ -164,7 +168,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
         box-sizing: border-box;
         background-color: #202020;
         color: ${color};
-        font-family: sans-serif;
+        font-family: "Ubuntu",sans-serif;
       }
 
       .navbar {
@@ -218,6 +222,12 @@ const Steps = ({ step, setStep }: StepsProps) => {
         height: 400px;
         object-fit: cover;
         border-radius: 50%;
+        transition: 0.3s;
+      }
+
+      .main-img img:hover{
+        border-radius:15px;
+        transform: scale(1.20);
       }
 
       .main-bottom {
