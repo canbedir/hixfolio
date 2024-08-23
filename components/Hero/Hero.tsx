@@ -17,7 +17,7 @@ const Hero = () => {
           <h1 className="text-center text-4xl lg:text-6xl font-extrabold">
             Create Your Portfolio in Minutes
           </h1>
-          <div className="w-full h-[150px] px-5 flex items-center justify-center shadow-primary shadow-lg rounded-2xl">
+          <div className="box w-full h-[150px] px-5 flex items-center justify-center bg-white text-black dark:text-white dark:bg-[#181717]">
             <div className="flex flex-col lg:flex-row items-center gap-5">
               <h1 className="text-xl lg:text-2xl font-semibold">
                 Quick and easy portfolio creation for showcasing your work.

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -60,12 +59,51 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.box {
+  position: relative;
+}
+
+.box:before,
+.box:after {
+  content: "";
+  top: -2px;
+  left: -2px;
+  position: absolute;
+  background: linear-gradient(
+    45deg,
+    #ff0037,
+    #ff00f2,
+    #3348ff,
+    #ae00ff
+  );
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: glow 70s linear infinite;
+}
+
+.box:after {
+  filter: blur(15px);
+}
+
+@keyframes glow {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
   }
 }
