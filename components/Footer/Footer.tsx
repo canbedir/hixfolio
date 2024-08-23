@@ -5,6 +5,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ConfettiPage from "../confetti";
 
 const Footer = () => {
   return (
@@ -15,9 +16,7 @@ const Footer = () => {
     >
       <div className="flex items-center justify-between h-full container max-w-7xl">
         <div>© 2024 liseden mezun olunca inş iş bulurum</div>
-        <h1 className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-primary to-indigo-900 text-4xl font-semibold">
-          hix
-        </h1>
+        <ConfettiPage />
         <div className="flex items-center justify-center gap-3">
           <Link href={"https://www.linkedin.com/in/canbedir/"}>
             <IoLogoLinkedin size={30} />
