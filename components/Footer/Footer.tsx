@@ -15,7 +15,7 @@ const Footer = () => {
       className="shadow-primary shadow-md m-1 mt-5 h-[100px]"
     >
       <div className="flex items-center justify-between h-full container max-w-7xl">
-        <div>© 2024 liseden mezun olunca inş iş bulurum</div>
+        <div>© 24082026 0258</div>
         <ConfettiPage />
         <div className="flex items-center justify-center gap-3">
           <Link href={"https://www.linkedin.com/in/canbedir/"}>
