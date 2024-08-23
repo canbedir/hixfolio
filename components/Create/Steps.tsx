@@ -43,6 +43,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
   const [jobPosition, setJobPosition] = useState("");
   const [color, setColor] = useState("");
   const [profilePic, setProfilePic] = useState<string | null>(null);
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
 
   useEffect(() => {
     const savedName = localStorage.getItem(`${id}_name`);
@@ -338,14 +339,6 @@ const Steps = ({ step, setStep }: StepsProps) => {
     URL.revokeObjectURL(url);
   };
 
-  const handleNext = () => {
-    setStep(step + 1);
-  };
-
-  const handleBack = () => {
-    setStep(step - 1);
-  };
-
   const [linkForms, setLinkForms] = useState([
     { id: Date.now(), name: "", url: "" },
   ]);
@@ -405,6 +398,61 @@ const Steps = ({ step, setStep }: StepsProps) => {
       )
     );
   };
+
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
+  useEffect(() => {
+    if (step === 1) {
+      setIsNextDisabled(
+        !name || !jobTitle || !profilePic || !email || !city || !phone
+      );
+    }
+
+    if (step === 2) {
+      setIsNextDisabled(!school);
+    }
+
+    if (step === 3) {
+      setIsNextDisabled(!company || !jobPosition);
+    }
+
+    if (step === 4) {
+      setIsNextDisabled(linkForms.length === 0);
+    }
+
+    if (step === 5) {
+      setIsNextDisabled(skillForms.length === 0);
+    }
+
+    if (step === 6) {
+      setIsNextDisabled(projectForms.length === 0);
+    }
+
+    if (step === 7) {
+      setIsNextDisabled(!color);
+    }
+  }, [
+    step,
+    name,
+    jobTitle,
+    profilePic,
+    email,
+    city,
+    phone,
+    school,
+    company,
+    jobPosition,
+    linkForms,
+    skillForms,
+    projectForms,
+    color,
+  ]);
 
   return (
     <div>
@@ -496,6 +544,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 onClick={handleNext}
                 className="text-white text-lg"
                 size={"lg"}
+                disabled={isNextDisabled}
               >
                 Next
               </Button>
@@ -541,6 +590,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
               onClick={handleNext}
               className="text-white text-lg bg-blue-600 hover:bg-blue-700"
               size={"lg"}
+              disabled={isNextDisabled}
             >
               Next
             </Button>
@@ -598,6 +648,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 onClick={handleNext}
                 className="text-white text-lg bg-orange-600 hover:bg-orange-700"
                 size={"lg"}
+                disabled={isNextDisabled}
               >
                 Next
               </Button>
@@ -647,6 +698,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
               onClick={handleNext}
               className="text-white text-lg bg-yellow-500 hover:bg-yellow-600"
               size={"lg"}
+              disabled={isNextDisabled}
             >
               Next
             </Button>
@@ -695,6 +747,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
               onClick={handleNext}
               className="text-white text-lg bg-cyan-600 hover:bg-cyan-700"
               size={"lg"}
+              disabled={isNextDisabled}
             >
               Next
             </Button>
@@ -743,6 +796,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
               onClick={handleNext}
               className="text-white text-lg bg-pink-500 hover:bg-pink-600"
               size={"lg"}
+              disabled={isNextDisabled}
             >
               Next
             </Button>
@@ -766,9 +820,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                     <span
                       onClick={() => setColor(stepColor.hex)}
                       className={`rounded-full h-7 w-7 cursor-pointer transition-all duration-300 ease-in-out ${
-                        color === stepColor.hex
-                          ? "scale-[1.30]"
-                          : ""
+                        color === stepColor.hex ? "scale-[1.30]" : ""
                       }`}
                       style={{ backgroundColor: stepColor.hex }}
                     ></span>
@@ -800,6 +852,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 onClick={handleNext}
                 className="text-white text-lg bg-rose-600 hover:bg-rose-700"
                 size={"lg"}
+                disabled={isNextDisabled}
               >
                 Next
               </Button>
