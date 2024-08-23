@@ -25,7 +25,7 @@ const DateSelector = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex justify-between">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col lg:flex-row gap-5 md:gap-0 justify-between">
       <div className="flex flex-col gap-3">
         <h2 className="font-semibold">Start Date</h2>
         <div className="flex gap-4">

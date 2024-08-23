@@ -28,19 +28,19 @@ const SkillForm = ({
   };
 
   return isSkillEditing ? (
-    <div className="flex items-center w-full gap-5">
-      <div className="w-full flex flex-col">
-        <Label htmlFor="skillName" className="mb-1">
-          Skill & Language Name
-        </Label>
-        <div className="flex w-full items-center gap-5">
-          <Input
-            className="shadow-lg shadow-cyan-500"
-            type="text"
-            id="skillName"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+    <div className="w-full flex flex-col gap-1">
+      <Label htmlFor="skillName" className="mb-1">
+        Skill & Language Name
+      </Label>
+      <div className="flex w-full flex-col sm:flex-row gap-5">
+        <Input
+          className="shadow-lg w-full shadow-cyan-500"
+          type="text"
+          id="skillName"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <div className="flex items-center gap-5">
           <ComboboxDemo
             selectedLevel={url}
             onLevelSelect={(newLevel) => setUrl(newLevel)}

@@ -460,8 +460,8 @@ const Steps = ({ step, setStep }: StepsProps) => {
 
       {step === 1 && (
         <div className="p-5">
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-10 md:gap-5">
+            <div className="flex items-center gap-4 justify-between">
               <div className="w-1/2 flex flex-col gap-5">
                 <div>
                   <Label htmlFor="name">Name & Surname</Label>
@@ -486,10 +486,10 @@ const Steps = ({ step, setStep }: StepsProps) => {
                   />
                 </div>
               </div>
-              <div className="flex flex-col items-center gap-2 justify-center">
+              <div className="flex flex-col gap-1.5 items-center justify-center">
                 <Label htmlFor="profilePic">Profile Picture</Label>
                 <img
-                  className="h-[90px] w-[90px] object-cover rounded-full"
+                  className="h-[80px] w-[80px] object-cover rounded-full"
                   src={profilePic ? profilePic : "Resim Yükle"}
                   alt=""
                 />
@@ -502,7 +502,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
                 />
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex gap-3">
                 <div>
                   <Label htmlFor="Email">Email</Label>
@@ -557,8 +557,8 @@ const Steps = ({ step, setStep }: StepsProps) => {
 
       {step === 2 && (
         <div className="p-5">
-          <div className="flex flex-col gap-10">
-            <div className="w-1/2">
+          <div className="flex flex-col gap-10 md:gap-3 lg:gap-10">
+            <div className="w-full md:w-1/2">
               <Label htmlFor="school">School Name</Label>
               <Input
                 className={shadowColor}

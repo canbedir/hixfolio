@@ -27,41 +27,39 @@ const ProjectForm = ({
   };
 
   return isEditing ? (
-    <div className="flex items-center  w-full gap-5">
-      <div className="w-full flex flex-col">
-        <Label htmlFor="link" className="mb-1">
-          Project Name
-        </Label>
+    <div className="w-full flex flex-col gap-1">
+      <Label htmlFor="link" className="mb-1">
+        Project Name
+      </Label>
+      <div className="flex w-full flex-col sm:flex-row items-center gap-5">
+        <Input
+          className="shadow-lg shadow-pink-500"
+          type="text"
+          placeholder="Hixfolio"
+          id="link"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <div className="flex w-full items-center gap-5">
           <Input
             className="shadow-lg shadow-pink-500"
             type="text"
-            placeholder="Hixfolio"
-            id="link"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Project Link"
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
           />
-          <div className="flex w-full items-center gap-5">
-            <Input
-              className="shadow-lg shadow-pink-500"
-              type="text"
-              placeholder="Project Link"
-              id="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
+          <Button variant={"ghost"} onClick={handleSave}>
+            Save
+          </Button>
+          <div>
+            <Trash
+              onClick={isLast ? undefined : onRemove}
+              className={`cursor-pointer ${
+                isLast ? "text-gray-400 cursor-not-allowed" : "text-red-600"
+              }`}
+              size={25}
             />
-            <Button variant={"ghost"} onClick={handleSave}>
-              Save
-            </Button>
-            <div>
-              <Trash
-                onClick={isLast ? undefined : onRemove}
-                className={`cursor-pointer ${
-                  isLast ? "text-gray-400 cursor-not-allowed" : "text-red-600"
-                }`}
-                size={25}
-              />
-            </div>
           </div>
         </div>
       </div>

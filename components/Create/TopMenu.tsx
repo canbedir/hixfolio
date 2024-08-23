@@ -6,7 +6,7 @@ const CreateTopMenu = ({ step, setStep }: { step: number; setStep: any }) => {
   };
 
   return (
-    <div className="flex items-center justify-around p-5 border-b text-sm">
+    <div className="hidden md:flex items-center justify-around p-5 border-b text-sm">
       <span
         className={`${
           step === 1

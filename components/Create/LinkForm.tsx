@@ -27,14 +27,13 @@ const LinkForm = ({
   };
 
   return isEditing ? (
-    <div className="flex items-center  w-full gap-5">
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col gap-1">
         <Label htmlFor="link" className="mb-1">
           Link name
         </Label>
-        <div className="flex w-full items-center gap-5">
+        <div className="flex flex-col sm:flex-row w-full gap-5">
           <Input
-            className="shadow-lg shadow-yellow-400"
+            className="shadow-lg w-full shadow-yellow-400"
             type="text"
             placeholder="Twitter"
             id="link"
@@ -65,7 +64,6 @@ const LinkForm = ({
           </div>
         </div>
       </div>
-    </div>
   ) : (
     <div className="flex items-center justify-between w-full gap-5">
       <div className="w-full">
