@@ -13,6 +13,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import CreateTopMenu from "./TopMenu";
 
 interface StepsProps {
   step: number;
@@ -457,6 +458,7 @@ const Steps = ({ step, setStep }: StepsProps) => {
   return (
     <div>
       {/* Step 1 */}
+      <CreateTopMenu isNextDisabled={isNextDisabled} setStep={setStep} step={step} />
 
       {step === 1 && (
         <div className="p-5">

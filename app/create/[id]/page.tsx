@@ -41,7 +41,6 @@ const CreateIdPage = () => {
           className={`w-full min-h-[400px] duration-300 relative ${shadowColor}`}
         >
           <div>
-            <CreateTopMenu setStep={setStep} step={step} />
             <Steps step={step} setStep={setStep} />
           </div>
         </div>
