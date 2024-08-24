@@ -10,7 +10,7 @@ const CreateTopMenu = ({
   isNextDisabled: boolean;
 }) => {
   const handleStepChange = (newStep: number) => {
-    if (!isNextDisabled || step > newStep) {
+    if (newStep <= step || !isNextDisabled) {
       setStep(newStep);
     }
   };
@@ -24,7 +24,6 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(1)}
-        disabled={step < 1}
       >
         Basic Info
       </button>
@@ -35,7 +34,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(2)}
-        disabled={step < 2 && isNextDisabled}
+        disabled={step < 1 || (step === 1 && isNextDisabled)}
       >
         Education Info
       </button>
@@ -46,7 +45,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(3)}
-        disabled={step < 3 && isNextDisabled}
+        disabled={step < 2 || (step === 2 && isNextDisabled)}
       >
         Experience Info
       </button>
@@ -57,7 +56,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(4)}
-        disabled={step < 4 && isNextDisabled}
+        disabled={step < 3 || (step === 3 && isNextDisabled)}
       >
         Social Media
       </button>
@@ -68,7 +67,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(5)}
-        disabled={step < 5 && isNextDisabled}
+        disabled={step < 4 || (step === 4 && isNextDisabled)}
       >
         Skills
       </button>
@@ -79,7 +78,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(6)}
-        disabled={step < 6 && isNextDisabled}
+        disabled={step < 5 || (step === 5 && isNextDisabled)}
       >
         Projects
       </button>
@@ -90,7 +89,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(7)}
-        disabled={step < 7 && isNextDisabled}
+        disabled={step < 6 || (step === 6 && isNextDisabled)}
       >
         Templates
       </button>
@@ -101,7 +100,7 @@ const CreateTopMenu = ({
             : "text-muted-foreground hover:text-white"
         } cursor-pointer`}
         onClick={() => handleStepChange(8)}
-        disabled={step < 8 && isNextDisabled}
+        disabled={step < 7 || (step === 7 && isNextDisabled)}
       >
         Download
       </button>
