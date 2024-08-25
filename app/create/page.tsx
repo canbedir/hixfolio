@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Trash2 } from "lucide-react";
 
 interface Portfolio {
   id: string;
@@ -27,7 +28,12 @@ const DashboardPage: React.FC = () => {
 
   const handleCreatePortfolio = (): void => {
     const id = uuidv4();
-    const nextPortfolioNumber = portfolios.length + 1;
+
+    const lastPortfolioNumber = portfolios.length
+      ? parseInt(portfolios[portfolios.length - 1].name.split(" ")[1])
+      : 0;
+
+    const nextPortfolioNumber = lastPortfolioNumber + 1;
     const name = `Portfolio ${nextPortfolioNumber}`;
 
     const newPortfolio: Portfolio = {
@@ -44,6 +50,15 @@ const DashboardPage: React.FC = () => {
     localStorage.setItem("portfolios", JSON.stringify(updatedPortfolios));
 
     router.push(`/create/${id}`);
+  };
+
+  const handleDeletePortfolio = (id: string) => {
+    const updatedPortfolios = portfolios.filter(
+      (portfolio) => portfolio.id !== id
+    );
+
+    setPortfolios(updatedPortfolios);
+    localStorage.setItem("portfolios", JSON.stringify(updatedPortfolios));
   };
 
   const formatDate = (dateString: string) => {
@@ -85,12 +100,20 @@ const DashboardPage: React.FC = () => {
         {portfolios.length > 0 ? (
           <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
             {portfolios.map((portfolio) => (
-              <li key={portfolio.id} className="mb-4">
+              <li
+                key={portfolio.id}
+                className="mb-4 flex items-center justify-start text-left relative"
+              >
                 <Link href={`/create/${portfolio.id}`}>
                   <Button variant={"link"} className="font-medium text-lg">
                     {`${portfolio.name} - ${formatDate(portfolio.createdAt)}`}
                   </Button>
                 </Link>
+                <Trash2
+                  onClick={() => handleDeletePortfolio(portfolio.id)}
+                  size={19}
+                  className="absolute -top-2 left-0 cursor-pointer text-red-600 hover:text-red-900 mt-2 mr-2"
+                />
               </li>
             ))}
           </ul>
