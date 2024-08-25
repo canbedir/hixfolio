@@ -7,7 +7,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Trash2 } from "lucide-react";
+import { Trash2, Edit2, Save } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 interface Portfolio {
   id: string;
@@ -18,6 +19,10 @@ interface Portfolio {
 const DashboardPage: React.FC = () => {
   const router = useRouter();
   const [portfolios, setPortfolios] = useState<Portfolio[]>([]);
+  const [editing, setEditing] = useState(false);
+  const [editedPortfolios, setEditedPortfolios] = useState<Map<string, string>>(
+    new Map()
+  );
 
   useEffect(() => {
     const storedPortfolios: Portfolio[] = JSON.parse(
@@ -61,6 +66,30 @@ const DashboardPage: React.FC = () => {
     localStorage.setItem("portfolios", JSON.stringify(updatedPortfolios));
   };
 
+  const handleEdit = () => {
+    setEditing(true);
+    const portfolioMap = new Map();
+    portfolios.forEach((portfolio) => {
+      portfolioMap.set(portfolio.id, portfolio.name);
+    });
+    setEditedPortfolios(portfolioMap);
+  };
+
+  const handleSave = () => {
+    const updatedPortfolios = portfolios.map((portfolio) => ({
+      ...portfolio,
+      name: editedPortfolios.get(portfolio.id) || portfolio.name,
+    }));
+
+    setPortfolios(updatedPortfolios);
+    localStorage.setItem("portfolios", JSON.stringify(updatedPortfolios));
+    setEditing(false);
+  };
+
+  const handleNameChange = (id: string, newName: string) => {
+    setEditedPortfolios((prev) => new Map(prev).set(id, newName));
+  };
+
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = {
       year: "numeric",
@@ -77,7 +106,7 @@ const DashboardPage: React.FC = () => {
       initial={{ opacity: 0, translateY: 200 }}
       animate={{ opacity: 1, translateY: 0 }}
       variant={{ x: 50 }}
-      className="container mt-10 min-h-[900px] max-w-7xl shadow-lg shadow-primary"
+      className="container mt-10 min-h-[900px] max-w-7xl shadow-lg shadow-primary relative"
     >
       <div className="flex items-center justify-center">
         <Link href="/" className="inline-block">
@@ -98,22 +127,37 @@ const DashboardPage: React.FC = () => {
       <div className="mt-8">
         <h2 className="text-3xl font-semibold text-center">Your Portfolios</h2>
         {portfolios.length > 0 ? (
-          <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
+          <ul className="mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
             {portfolios.map((portfolio) => (
               <li
                 key={portfolio.id}
-                className="mb-4 flex items-center justify-start text-left relative"
+                className="mb-4 flex items-center justify-between text-left relative"
               >
-                <Link href={`/create/${portfolio.id}`}>
-                  <Button variant={"link"} className="font-medium text-lg">
-                    {`${portfolio.name} - ${formatDate(portfolio.createdAt)}`}
-                  </Button>
-                </Link>
-                <Trash2
-                  onClick={() => handleDeletePortfolio(portfolio.id)}
-                  size={19}
-                  className="absolute -top-2 left-0 cursor-pointer text-red-600 hover:text-red-900 mt-2 mr-2"
-                />
+                {editing ? (
+                  <Input
+                    type="text"
+                    value={editedPortfolios.get(portfolio.id) || ""}
+                    onChange={(e) =>
+                      handleNameChange(portfolio.id, e.target.value)
+                    }
+                    className="shadow-lg shadow-blue-900"
+                  />
+                ) : (
+                  <Link href={`/create/${portfolio.id}`}>
+                    <Button variant={"link"} className="font-medium text-lg">
+                      {`${portfolio.name} - ${formatDate(
+                        portfolio.createdAt
+                      )}`}
+                    </Button>
+                  </Link>
+                )}
+                {editing && (
+                  <Trash2
+                    onClick={() => handleDeletePortfolio(portfolio.id)}
+                    size={25}
+                    className="cursor-pointer text-red-600 hover:text-red-900 ml-2"
+                  />
+                )}
               </li>
             ))}
           </ul>
@@ -126,6 +170,17 @@ const DashboardPage: React.FC = () => {
               height={100}
             />
           </div>
+        )}
+      </div>
+      <div className="absolute bottom-4 right-4 flex space-x-2">
+        {editing ? (
+          <Button onClick={handleSave} variant={"secondary"} className="text-white">
+            <Save size={24} />
+          </Button>
+        ) : (
+          <Button onClick={handleEdit} variant={"secondary"} className="text-white">
+            <Edit2 size={24} />
+          </Button>
         )}
       </div>
     </motion.div>
