@@ -22,25 +22,29 @@ const Step3: React.FC<Step3Props> = ({
     <div className="p-5">
       <div className="flex items-center">
         <div className="flex flex-col w-full gap-10">
-          <div className="flex items-center gap-5">
-            <Label htmlFor="company">Company</Label>
-            <Input
-              id="company"
-              type="text"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              placeholder="Enter your company"
-            />
-          </div>
-          <div className="flex items-center gap-5">
-            <Label htmlFor="jobPosition">Job Position</Label>
-            <Input
-              id="jobPosition"
-              type="text"
-              value={jobPosition}
-              onChange={(e) => setJobPosition(e.target.value)}
-              placeholder="Enter your job position"
-            />
+          <div className="grid grid-cols-2 gap-5">
+            <div>
+              <Label htmlFor="company">Company Name</Label>
+              <Input
+                className={shadowColor}
+                type="text"
+                id="company"
+                placeholder="Hix Ltd"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="jobposition">Job Position</Label>
+              <Input
+                className={shadowColor}
+                type="text"
+                id="jobposition"
+                placeholder="Backend Developer"
+                value={jobPosition}
+                onChange={(e) => setJobPosition(e.target.value)}
+              />
+            </div>
           </div>
           <div>
             <DateSelector />

@@ -13,7 +13,7 @@ interface Step1Props {
   setCity: (city: string) => void;
   phone: string;
   setPhone: (phone: string) => void;
-  profilePic: any
+  profilePic: any;
   handleImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
   shadowColor: string;
 }
@@ -33,99 +33,100 @@ const Step1: React.FC<Step1Props> = ({
   handleImageUpload,
   shadowColor,
 }) => {
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.replace(/\D/g, '');
+    
+    if (input.length > 0) {
+      const firstPart = input.substring(0, 6).match(/.{1,3}/g)?.join(' ') || '';
+      
+      const secondPart = input.substring(6).match(/.{1,2}/g)?.join(' ') || '';
+      
+      input = [firstPart, secondPart].filter(Boolean).join(' ');
+    }
+  
+    setPhone(input);
+  };
+
   return (
     <div className="p-5">
       <div className="flex flex-col gap-10 md:gap-5">
-        {/* Name, job title and profile picture section */}
-        <div className="flex flex-col gap-5">
-          <div className="flex items-center gap-5">
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center gap-5">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div className="flex items-center gap-5">
-                <Label htmlFor="jobTitle">Job Title</Label>
-                <Input
-                  id="jobTitle"
-                  type="text"
-                  value={jobTitle}
-                  onChange={(e) => setJobTitle(e.target.value)}
-                  placeholder="Enter your job title"
-                />
-              </div>
+        <div className="flex items-center gap-4 justify-between">
+          <div className="w-1/2 flex flex-col gap-5">
+            <div>
+              <Label htmlFor="name">Name & Surname</Label>
+              <Input
+                className={shadowColor}
+                type="text"
+                id="name"
+                placeholder="Irmak Balota"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center gap-5">
-                <Label htmlFor="profilePic">Profile Picture</Label>
-                <input
-                  id="profilePic"
-                  type="file"
-                  onChange={handleImageUpload}
-                  accept=".jpg, .jpeg, .png"
-                />
-              </div>
-              <div className="flex flex-col gap-1.5 items-center justify-center">
-                <Label htmlFor="profilePic">Profile Picture</Label>
-                <img
-                  className="h-[80px] w-[80px] object-cover rounded-full"
-                  src={profilePic ? profilePic : "Resim Yükle"}
-                  alt=""
-                />
-                <Input
-                  className={shadowColor}
-                  type="file"
-                  id="profilePic"
-                  accept="image/*"
-                  onChange={(e) => handleImageUpload(e)}
-                />
-              </div>
+            <div>
+              <Label htmlFor="JobTitle">Job Title</Label>
+              <Input
+                className={shadowColor}
+                type="text"
+                id="JobTitle"
+                placeholder="Fullstack Developer"
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+              />
             </div>
           </div>
+          <div className="flex flex-col gap-1.5 items-center justify-center">
+            <Label htmlFor="profilePic">Profile Picture</Label>
+            <img
+              className="h-[80px] w-[80px] object-cover rounded-full"
+              src={profilePic ? profilePic : "Resim Yükle"}
+              alt=""
+            />
+            <Input
+              className={shadowColor}
+              type="file"
+              id="profilePic"
+              accept="image/*"
+              onChange={(e) => handleImageUpload(e)}
+            />
+          </div>
         </div>
-        {/* Email, city and phone section */}
-        <div className="flex flex-col gap-5">
-          <div className="flex items-center gap-5">
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center gap-5">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div className="flex items-center gap-5">
-                <Label htmlFor="city">City</Label>
-                <Input
-                  id="city"
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  placeholder="Enter your city"
-                />
-              </div>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex gap-3">
+            <div>
+              <Label htmlFor="Email">Email</Label>
+              <Input
+                className={shadowColor}
+                type="text"
+                id="Email"
+                placeholder="hix@dev.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center gap-5">
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Enter your phone number"
-                />
-              </div>
+            <div>
+              <Label htmlFor="City">City</Label>
+              <Input
+                className={shadowColor}
+                type="text"
+                id="City"
+                placeholder="Istanbul"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
             </div>
+          </div>
+          <div className="w-1/2">
+            <Label htmlFor="Phone">Phone</Label>
+            <Input
+              className={shadowColor}
+              type="text"
+              id="Phone"
+              placeholder="000 000 00 00"
+              value={phone}
+              onChange={handlePhoneChange}
+            />
           </div>
         </div>
       </div>

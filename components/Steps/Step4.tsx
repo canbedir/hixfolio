@@ -20,11 +20,13 @@ const Step4: React.FC<Step4Props> = ({
         {linkForms.map((form) => (
           <LinkForm
             key={form.id}
+            onRemove={() => removeLinkForm(form.id)}
+            isLast={linkForms.length === 1}
             linkName={form.name}
             linkUrl={form.url}
-            onRemove={() => removeLinkForm(form.id)}
-            onEdit={(newName, newUrl) => updateLinkForm(form.id, newName, newUrl)}
-            isLast={form.id === linkForms[linkForms.length - 1].id}
+            onEdit={(newName, newUrl) =>
+              updateLinkForm(form.id, newName, newUrl)
+            }
           />
         ))}
         <div className="flex justify-start w-full">
