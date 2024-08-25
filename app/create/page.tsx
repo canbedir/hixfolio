@@ -259,7 +259,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
         />
       ) : (
         <Link href={`/create/${portfolio.id}`}>
-          <h1 className="text-white">{`${portfolio.name} - ${formatDate(
+          <h1 className="dark:text-white">{`${portfolio.name} - ${formatDate(
             portfolio.createdAt
           )}`}</h1>
         </Link>
