@@ -9,6 +9,15 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Trash2, Edit2, Save } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  rectSortingStrategy,
+  useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface Portfolio {
   id: string;
@@ -101,6 +110,19 @@ const DashboardPage: React.FC = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
+  const handleDragEnd = ({ active, over }: any) => {
+    if (active.id !== over.id) {
+      setPortfolios((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        const newItems = arrayMove(items, oldIndex, newIndex);
+
+        localStorage.setItem("portfolios", JSON.stringify(newItems));
+        return newItems;
+      });
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, translateY: 200 }}
@@ -127,40 +149,27 @@ const DashboardPage: React.FC = () => {
       <div className="mt-8">
         <h2 className="text-3xl font-semibold text-center">Your Portfolios</h2>
         {portfolios.length > 0 ? (
-          <ul className="mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
-            {portfolios.map((portfolio) => (
-              <li
-                key={portfolio.id}
-                className="mb-4 flex items-center justify-between text-left relative"
-              >
-                {editing ? (
-                  <Input
-                    type="text"
-                    value={editedPortfolios.get(portfolio.id) || ""}
-                    onChange={(e) =>
-                      handleNameChange(portfolio.id, e.target.value)
-                    }
-                    className="shadow-lg shadow-blue-900"
+          <DndContext
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext items={portfolios} strategy={rectSortingStrategy}>
+              <ul className="mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
+                {portfolios.map((portfolio) => (
+                  <SortableItem
+                    key={portfolio.id}
+                    id={portfolio.id}
+                    portfolio={portfolio}
+                    editing={editing}
+                    editedPortfolios={editedPortfolios}
+                    handleNameChange={handleNameChange}
+                    handleDeletePortfolio={handleDeletePortfolio}
+                    formatDate={formatDate}
                   />
-                ) : (
-                  <Link href={`/create/${portfolio.id}`}>
-                    <Button variant={"link"} className="font-medium text-lg">
-                      {`${portfolio.name} - ${formatDate(
-                        portfolio.createdAt
-                      )}`}
-                    </Button>
-                  </Link>
-                )}
-                {editing && (
-                  <Trash2
-                    onClick={() => handleDeletePortfolio(portfolio.id)}
-                    size={25}
-                    className="cursor-pointer text-red-600 hover:text-red-900 ml-2"
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
+                ))}
+              </ul>
+            </SortableContext>
+          </DndContext>
         ) : (
           <div className="mt-10 flex items-center justify-center">
             <Image
@@ -174,11 +183,19 @@ const DashboardPage: React.FC = () => {
       </div>
       <div className="absolute bottom-4 right-4 flex space-x-2">
         {editing ? (
-          <Button onClick={handleSave} variant={"secondary"} className="text-white">
+          <Button
+            onClick={handleSave}
+            variant={"secondary"}
+            className="text-white"
+          >
             <Save size={24} />
           </Button>
         ) : (
-          <Button onClick={handleEdit} variant={"secondary"} className="text-white">
+          <Button
+            onClick={handleEdit}
+            variant={"secondary"}
+            className="text-white"
+          >
             <Edit2 size={24} />
           </Button>
         )}
@@ -188,3 +205,72 @@ const DashboardPage: React.FC = () => {
 };
 
 export default DashboardPage;
+
+interface SortableItemProps {
+  id: string;
+  portfolio: Portfolio;
+  editing: boolean;
+  editedPortfolios: Map<string, string>;
+  handleNameChange: (id: string, newName: string) => void;
+  handleDeletePortfolio: (id: string) => void;
+  formatDate: (dateString: string) => string;
+}
+
+const SortableItem: React.FC<SortableItemProps> = ({
+  id,
+  portfolio,
+  editing,
+  editedPortfolios,
+  handleNameChange,
+  handleDeletePortfolio,
+  formatDate,
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    boxShadow: isDragging
+      ? "0px 4px 15px rgba(0, 100, 255, 3)"
+      : "0px 3px 10px rgba(40, 40, 155, 1)",
+  };
+
+  return (
+    <li
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow"
+    >
+      {editing ? (
+        <Input
+          type="text"
+          value={editedPortfolios.get(portfolio.id) || ""}
+          onChange={(e) => handleNameChange(portfolio.id, e.target.value)}
+          className="shadow-lg shadow-blue-900"
+        />
+      ) : (
+        <Link href={`/create/${portfolio.id}`}>
+          <h1 className="text-white">{`${portfolio.name} - ${formatDate(
+            portfolio.createdAt
+          )}`}</h1>
+        </Link>
+      )}
+      {editing && (
+        <Trash2
+          onClick={() => handleDeletePortfolio(portfolio.id)}
+          size={25}
+          className="cursor-pointer text-red-600 hover:text-red-900 ml-2"
+        />
+      )}
+    </li>
+  );
+};
