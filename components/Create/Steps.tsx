@@ -221,6 +221,80 @@ const Steps: React.FC<StepsProps> = ({ step, setStep }) => {
         justify-content: center;
         gap:60px; 
       }
+        @media screen and (max-width: 1200px) {
+        .main-container {
+          flex-direction: column;
+          margin: 50px 100px;
+        }
+        .main-right {
+          margin-top: 50px;
+        }
+        .main-bottom {
+          padding: 50px 100px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        h1 {
+          font-size: 32px;
+        }
+        p {
+          font-size: 18px;
+        }
+        .navbar {
+          height: 50px;
+        }
+        .main-container {
+          margin: 50px 50px;
+        }
+        .main-bottom {
+          padding: 50px 50px;
+        }
+        .main-img {
+          height: 300px;
+          width: 300px;
+        }
+        .main-img img {
+          height: 300px;
+          width: 300px;
+        }
+        .skills-container {
+          padding: 20px;
+        }
+        .skills-main {
+          gap: 30px;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        h1 {
+          font-size: 28px;
+        }
+        p {
+          font-size: 16px;
+        }
+        .navbar {
+          height: 50px;
+        }
+        .main-container {
+          margin: 20px;
+        }
+        .main-img {
+          height: 250px;
+          width: 250px;
+        }
+        .main-img img {
+          height: 250px;
+          width: 250px;
+        }
+        .email-btn {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+        .skills-container {
+          padding: 10px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -236,8 +310,8 @@ const Steps: React.FC<StepsProps> = ({ step, setStep }) => {
             <h1>${jobTitle}</h1>
           </div>
           <div class="main-p">
-            <p>I live in ${city}, I study/studied at ${school}.</p>
-            <p>I work/worked in ${company}.</p>
+            <p>I live in ${city}, I studied at ${school}.</p>
+            <p>I work in ${company}.</p>
             <p>My phone number: ${phone}</p>
           </div>
           <div class="main-email">
