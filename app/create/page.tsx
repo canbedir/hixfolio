@@ -149,27 +149,49 @@ const DashboardPage: React.FC = () => {
       <div className="mt-8">
         <h2 className="text-3xl font-semibold text-center">Your Portfolios</h2>
         {portfolios.length > 0 ? (
-          <DndContext
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext items={portfolios} strategy={rectSortingStrategy}>
-              <ul className="mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
-                {portfolios.map((portfolio) => (
-                  <SortableItem
-                    key={portfolio.id}
-                    id={portfolio.id}
-                    portfolio={portfolio}
-                    editing={editing}
-                    editedPortfolios={editedPortfolios}
-                    handleNameChange={handleNameChange}
-                    handleDeletePortfolio={handleDeletePortfolio}
-                    formatDate={formatDate}
-                  />
-                ))}
-              </ul>
-            </SortableContext>
-          </DndContext>
+          editing ? (
+            // Render portfolio list without drag-and-drop when editing
+            <ul className="mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
+              {portfolios.map((portfolio) => (
+                <SortableItem
+                  key={portfolio.id}
+                  id={portfolio.id}
+                  portfolio={portfolio}
+                  editing={editing}
+                  editedPortfolios={editedPortfolios}
+                  handleNameChange={handleNameChange}
+                  handleDeletePortfolio={handleDeletePortfolio}
+                  formatDate={formatDate}
+                />
+              ))}
+            </ul>
+          ) : (
+            // Render portfolio list with drag-and-drop when not editing
+            <DndContext
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={portfolios}
+                strategy={rectSortingStrategy}
+              >
+                <ul className="mt-10 grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 text-center">
+                  {portfolios.map((portfolio) => (
+                    <SortableItem
+                      key={portfolio.id}
+                      id={portfolio.id}
+                      portfolio={portfolio}
+                      editing={editing}
+                      editedPortfolios={editedPortfolios}
+                      handleNameChange={handleNameChange}
+                      handleDeletePortfolio={handleDeletePortfolio}
+                      formatDate={formatDate}
+                    />
+                  ))}
+                </ul>
+              </SortableContext>
+            </DndContext>
+          )
         ) : (
           <div className="mt-10 flex items-center justify-center">
             <Image
@@ -186,7 +208,7 @@ const DashboardPage: React.FC = () => {
           <Button
             onClick={handleSave}
             variant={"secondary"}
-            className="text-white"
+            className="text-white bg-slate-400 hover:bg-slate-500"
           >
             <Save size={24} />
           </Button>
@@ -194,7 +216,7 @@ const DashboardPage: React.FC = () => {
           <Button
             onClick={handleEdit}
             variant={"secondary"}
-            className="text-white"
+            className="text-white bg-slate-400 hover:bg-slate-500"
           >
             <Edit2 size={24} />
           </Button>
@@ -248,7 +270,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
       style={style}
       {...attributes}
       {...listeners}
-      className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow"
+      className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow relative"
     >
       {editing ? (
         <Input
@@ -268,7 +290,7 @@ const SortableItem: React.FC<SortableItemProps> = ({
         <Trash2
           onClick={() => handleDeletePortfolio(portfolio.id)}
           size={25}
-          className="cursor-pointer text-red-600 hover:text-red-900 ml-2"
+          className="cursor-pointer text-red-600 hover:text-red-900 absolute top-0 right-2"
         />
       )}
     </li>
