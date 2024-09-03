@@ -17,7 +17,7 @@ const Hero = () => {
           <h1 className="text-center text-4xl lg:text-6xl font-extrabold">
             Create Your Portfolio in Minutes
           </h1>
-          <div className="box w-full h-[150px] px-5 flex items-center justify-center bg-white text-black dark:text-white dark:bg-[#181717]">
+          <div className="box w-full h-[150px] px-5 flex items-center rounded-xl justify-center bg-white text-black dark:text-white dark:bg-[#181717]">
             <div className="flex flex-col lg:flex-row items-center gap-5">
               <h1 className="text-xl lg:text-2xl font-semibold">
                 Quick and easy portfolio creation for showcasing your work.
@@ -30,7 +30,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="justify-center shadow-primary shadow-lg hidden lg:flex">
+        <div className="justify-center shadow-primary shadow-lg rounded-xl hidden lg:flex">
           <Image
             src={"/illustrator/browsing.svg"}
             alt="Illustration of browsing"
@@ -40,7 +40,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="w-full rounded-2xl max-h-max mt-10 p-5 shadow-primary shadow-lg">
+      <div className="w-full rounded-xl max-h-max mt-10 p-5 shadow-primary shadow-lg">
         <h1 className="text-xl text-center font-bold">
           Let’s build a stunning portfolio with our easy-to-use builder.
         </h1>

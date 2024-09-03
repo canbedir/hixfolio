@@ -12,7 +12,7 @@ const Footer = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="shadow-primary shadow-md m-1 mt-5 h-[100px]"
+      className="shadow-primary shadow-md m-1 mt-10 h-[100px]"
     >
       <div className="flex items-center justify-between h-full container max-w-7xl">
         <div>© 24082026 0258</div>

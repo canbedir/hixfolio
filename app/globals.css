@@ -90,6 +90,7 @@
   height: calc(100% + 4px);
   z-index: -1;
   animation: glow 70s linear infinite;
+  border-radius: 0.75rem;
 }
 
 .box:after {
