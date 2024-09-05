@@ -208,7 +208,7 @@ const DashboardPage: React.FC = () => {
           <Button
             onClick={handleSave}
             variant={"secondary"}
-            className="text-white bg-slate-400 hover:bg-slate-500"
+            className="text-black dark:text-white bg-black hover:bg-black/80 dark:bg-white dark:hover:bg-white/80"
           >
             <Save size={24} />
           </Button>
@@ -216,7 +216,7 @@ const DashboardPage: React.FC = () => {
           <Button
             onClick={handleEdit}
             variant={"secondary"}
-            className="text-white bg-slate-400 hover:bg-slate-500"
+            className="text-black dark:text-white bg-black hover:bg-black/80 dark:bg-white dark:hover:bg-white/80"
           >
             <Edit2 size={24} />
           </Button>
